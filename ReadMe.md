@@ -1,5 +1,7 @@
 # Blog Posted Dates
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/edm00se/blog-posted-dates.svg)](https://greenkeeper.io/)
+
 Say you want to enage in some higher level analytics regarding your blog posts, you may need a data set of dates to titles (and url slug). This is a mini project to accomplish just that.
 
 ## Installation
