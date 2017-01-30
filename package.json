@@ -12,8 +12,8 @@
   "license": "MIT",
   "homepage": "https://github.com/edm00se/blog-posted-dates#readme",
   "dependencies": {
-    "console.table": "^0.7.0",
-    "dotenv": "^2.0.0",
+    "console.table": "^0.8.0",
+    "dotenv": "^4.0.0",
     "json2csv": "^3.5.0",
     "xml2js": "^0.4.16"
   }
