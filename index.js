@@ -1,58 +1,54 @@
 #!/usr/bin/env node
 
-var https = require('https'),
-    fs = require('fs'),
-    parseString = require('xml2js').parseString,
-    json2csv = require('json2csv');
-require('console.table');
-require('dotenv').config();
+const https = require('https');
+const fs = require('fs');
+const path = require('path');
+const parseString = require('xml2js').parseString;
+const json2csv = require('json2csv');
 
 function getAtomFeedXML(url, cb){
-  return https.get(url, function(res){
+  return https.get(url, (res) => {
     console.log('status: '+res.statusCode);
-    //console.log('headers: ',res.headers);
-    var body = '';
-    res.on('data', function(d){
+    let body = '';
+    res.on('data', d => {
       body += d;
     });
-    res.on('end', function(){
-      var parsed = {};
-      parseString(body, {trim: true}, function(err, result){
+    res.on('end', () => {
+      let parsed = {};
+      parseString(body, {trim: true}, (err, result) => {
         cb(null,result);
      });
     });
   });
 }
 
-var url = process.env.BLOG_URL;
-getAtomFeedXML(url,function(err,data){
+getAtomFeedXML(process.env.BLOG_ATOM_URL,(err,data) => {
   if(!err){
-    var dtAr = [];
-    data.feed.entry.forEach(function(el,i,ar){
-      var url_ar = el.id[0].split('/');
+    let dtAr = [];
+    data.feed.entry.forEach((el,i,ar) => {
+      let url_ar = el.id[0].split('/');
       url_ar.shift();
       url_ar.shift();
       url_ar.shift();
-      var url_partial = url_ar.join('/');
-      var tmp = {
+      let url_partial = url_ar.join('/');
+      const tmp = {
         'title': el.title[0]['_'],
-        'date': el.published[0],
+        'date': el.published[0].split('T')[0],
         'url': url_partial,
         'full_url': el.id[0]
       };
       dtAr.push(tmp);
     });
-    //console.table(dtAr);
-    var flds = ['title', 'date','url','full_url'];
-    json2csv({ data: dtAr, fields: flds }, function(er, csv){
+    const flds = ['title', 'date','url','full_url'];
+    json2csv({ data: dtAr, fields: flds }, (er, csv) => {
       if( er ){
         console.error(er);
       }else{
-        fs.writeFile('blog-posts-dates.csv', csv, function(e){
+        fs.writeFile(path.join(__dirname,'report','blog-posts-dates.csv'), csv, e => {
           if(e){
             console.error(e);
           }else{
-            console.log('blog-posts-dates.csv created');
+            console.log('blog-posts-dates.csv created in the report dir');
           }
         });
       }

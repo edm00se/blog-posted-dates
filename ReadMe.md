@@ -7,9 +7,9 @@ Say you want to enage in some higher level analytics regarding your blog posts, 
 1. `git clone https://github.com/edm00se/blog-posted-dates.git`
 2. `cd blog-posted-dates`
 3. `npm install`
-4. edit the `.env` file's `BLOG_URL` property to be the URL to _your_ blog's Atom feed
+4. edit the `BLOG_ATOM_URL` property in `package.json` to be the URL to _your_ blog's Atom feed
 5. `npm start`
-6. use the generated `blog-posts-dates.csv` file
+6. use the generated `blog-posts-dates.csv` file, located in the `report/` directory
 
 ## Contributing
 

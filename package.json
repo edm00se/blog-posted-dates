@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "clean": "rimraf report",
+    "generate": "npm run clean && npm-run-all generate:*",
+    "generate:mkdir": "mkdirp report",
+    "generate:report": "cross-env BLOG_ATOM_URL=https://edm00se.io/atomFull.xml node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -12,9 +15,11 @@
   "license": "MIT",
   "homepage": "https://github.com/edm00se/blog-posted-dates#readme",
   "dependencies": {
-    "console.table": "^0.7.0",
-    "dotenv": "^2.0.0",
-    "json2csv": "^3.5.0",
-    "xml2js": "^0.4.16"
+    "cross-env": "5.0.5",
+    "json2csv": "3.11.4",
+    "mkdirp": "0.5.1",
+    "npm-run-all": "^4.1.1",
+    "rimraf": "2.6.2",
+    "xml2js": "0.4.19"
   }
 }
