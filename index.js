@@ -5,6 +5,7 @@ const fs = require('fs');
 const path = require('path');
 const parseString = require('xml2js').parseString;
 const json2csv = require('json2csv');
+const url = process.env.BLOG_ATOM_URL;
 
 function getAtomFeedXML(url, cb){
   return https.get(url, (res) => {
@@ -22,7 +23,7 @@ function getAtomFeedXML(url, cb){
   });
 }
 
-getAtomFeedXML(process.env.BLOG_ATOM_URL,(err,data) => {
+getAtomFeedXML(url,(err,data) => {
   if(!err){
     let dtAr = [];
     data.feed.entry.forEach((el,i,ar) => {

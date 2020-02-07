@@ -7,7 +7,7 @@
     "clean": "rimraf report",
     "generate": "npm run clean && npm-run-all generate:*",
     "generate:mkdir": "mkdirp report",
-    "generate:report": "cross-env BLOG_ATOM_URL=https://edm00se.io/atomFull.xml node index.js",
+    "generate:report": "cross-env BLOG_ATOM_URL=https://edm00se.io/atom.xml node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
